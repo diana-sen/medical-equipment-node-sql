@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require("dotenv").config(); // module for environment variables
+//console.log(process.env); // test dotenv
 var indexRouter = require('./routes/index');
 
 var app = express();
