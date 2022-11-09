@@ -17,6 +17,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1', indexRouter);
 
+app.use("/medical-equipments", (req, res, next) => {
+  res.send( { status: 'OK' });
+});
+  
+
+//not found route
+app.use("*", (req, res, next) =>
+      res.status(404).send({message: "Not found"})
+);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
