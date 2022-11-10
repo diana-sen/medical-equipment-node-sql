@@ -11,6 +11,7 @@ const package = require('./package.json');
 var app = express();
 
 var areasRouter = require("./routes/areas");
+var personsRouter = require("./routes/persons");
 //var medicalEquipmentsRouter = require("./routes/medical-equipments");
 
 // view engine setup
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 app.use('/api/v1', indexRouter);
 app.use("/api/v1/areas", areasRouter);
+app.use("/api/v1/persons", personsRouter);
 //app.use("/api/v1/medical-equipments", medicalEquipmentsRouter);
 
 
