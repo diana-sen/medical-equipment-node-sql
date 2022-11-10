@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model area {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  created_at        String?             @db.VarChar(255)
+  updated_at        String?             @db.VarChar(255)
+  medical_equipment medical_equipment[]
+}
+
+model maintenance_record {
+  id                   Int               @id @default(autoincrement())
+  medical_equipment_id Int
+  maintenance_order    String            @db.VarChar(255)
+  maintenance_type     String            @db.VarChar(255)
+  note                 String?
+  date                 String            @db.VarChar(255)
+  created_at           String?           @db.VarChar(255)
+  updated_at           String?           @db.VarChar(255)
+  medical_equipment    medical_equipment @relation(fields: [medical_equipment_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model medical_equipment {
+  id                 Int                  @id @default(autoincrement())
+  inventory_code     String               @db.VarChar(255)
+  name               String               @db.VarChar(255)
+  serial_number      String               @db.VarChar(255)
+  model_id           Int
+  responsible_id     Int?
+  area_id            Int?
+  is_active          Boolean?
+  created_at         String?              @db.VarChar(255)
+  updated_at         String?              @db.VarChar(255)
+  area               area?                @relation(fields: [area_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  model              model                @relation(fields: [model_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  person             person?              @relation(fields: [responsible_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  maintenance_record maintenance_record[]
+}
+
+model model {
+  id                Int                 @id @default(autoincrement())
+  description       String
+  brand             String              @db.VarChar(255)
+  manufacture_year  String              @db.VarChar(255)
+  created_at        String?             @db.VarChar(255)
+  updated_at        String?             @db.VarChar(255)
+  medical_equipment medical_equipment[]
+}
+
+model person {
+  id                Int                 @id @default(autoincrement())
+  first_name        String              @db.VarChar(255)
+  last_name         String              @db.VarChar(255)
+  role              String              @db.VarChar(255)
+  phone             String              @db.VarChar(255)
+  email_address     String              @db.VarChar(255)
+  created_at        String?             @db.VarChar(255)
+  updated_at        String?             @db.VarChar(255)
+  medical_equipment medical_equipment[]
+}
