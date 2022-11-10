@@ -6,23 +6,25 @@ var logger = require('morgan');
 require("dotenv").config(); // module for environment variables
 //console.log(process.env); // test dotenv
 var indexRouter = require('./routes/index');
+const package = require('./package.json');
 
 var app = express();
 
-// view engine setup
+var areasRouter = require("./routes/areas");
+//var medicalEquipmentsRouter = require("./routes/medical-equipments");
 
+// view engine setup
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//routes
 app.use('/api/v1', indexRouter);
+app.use("/api/v1/areas", areasRouter);
+//app.use("/api/v1/medical-equipments", medicalEquipmentsRouter);
 
-app.use("/medical-equipments", (req, res, next) => {
-  res.send( { status: 'OK' });
-});
-  
 
 //not found route
 app.use("*", (req, res, next) =>
