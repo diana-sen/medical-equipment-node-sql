@@ -13,7 +13,7 @@ var app = express();
 var areasRouter = require("./routes/areas");
 var personsRouter = require("./routes/persons");
 var modelsRouter = require("./routes/models");
-//var medicalEquipmentsRouter = require("./routes/medical-equipments");
+var medicalEquipmentsRouter = require("./routes/medical-equipments");
 
 // view engine setup
 app.use(logger('dev'));
@@ -27,7 +27,7 @@ app.use('/api/v1', indexRouter);
 app.use("/api/v1/areas", areasRouter);
 app.use("/api/v1/persons", personsRouter);
 app.use("/api/v1/models", modelsRouter);
-//app.use("/api/v1/medical-equipments", medicalEquipmentsRouter);
+app.use("/api/v1/medical-equipments", medicalEquipmentsRouter);
 
 
 //not found route
